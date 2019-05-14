@@ -83,14 +83,6 @@ class CapParser(object):
                         entry['samecodes'] = [x for x in entry['FIPS6'] if str(x).isdigit()]  # handle bad nws data
                     except Exception:
                         entry['samecodes'] = []
-            # Convert polygon coords to list of lists (lat, lon)
-            elif tag == 'cap:polygon':
-                try:
-                    coords_raw = dom.getElementsByTagName(tag)[0].firstChild.data
-                    coords_str = [t.split(',') for t in coords_raw]
-                    coords_flt = [[float(c[0]), float(c[1])] for c in coords_str]
-                except AttributeError:
-                    entry[tag] = []
             else:
                 try:
                     entry[tag] = dom.getElementsByTagName(tag)[0].firstChild.data

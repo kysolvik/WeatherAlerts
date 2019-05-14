@@ -10,6 +10,11 @@ def _ts_parse(ts):
         dt += timedelta(hours=int(ts[20:22]),minutes=int(ts[23:]))
     return dt.replace(tzinfo=pytz.UTC)
 
+def _polygon_parse(polygon_string):
+    coords_str = [t.split(',') for t in polygon_string.split(' ')]
+    coords_flt = [[float(c[0]), float(c[1])] for c in coords_str]
+    return coords_flt
+
 class Alert(object):
     """
     Create an alert object with the cap dict created from cap xml parser.
@@ -43,6 +48,7 @@ class Alert(object):
                 'urgency': self.urgency,
                 'msgtype': self.msgtype,
                 'link': self.link,
+                'polygon': self.polygon
                 }
 
     @property
@@ -121,6 +127,10 @@ class Alert(object):
     @property
     def msgtype(self):
         return self._raw['cap:msgType']
+
+    @property
+    def polygon(self):
+        return _polygon_parse(self._raw['cap:polygon'])
 
     @property
     def link(self):
