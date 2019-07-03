@@ -30,7 +30,7 @@ class CapParser(object):
         self.samecodes = self.geo.samecodes
         self._cap_tags = ['title', 'id', 'updated', 'published', 'link', 'summary', 'cap:event', 'cap:effective',
                           'cap:expires', 'cap:status', 'cap:msgType', 'cap:category', 'cap:urgency', 'cap:severity',
-                          'cap:certainty', 'cap:areaDesc', 'cap:geocode']
+                          'cap:certainty', 'cap:areaDesc', 'cap:geocode', 'cap:polygon']
 
     def get_alerts(self):
         """
